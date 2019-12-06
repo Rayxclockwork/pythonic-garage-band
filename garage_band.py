@@ -1,11 +1,12 @@
 class Band:
+    pass
 
     all = []
 
-    def __init__(self, name, members=[]):
+    def __init__(self, name, musicians=[]):
         """"creates a band instance using the subclasses below"""
-        self.name = name
-        self.members = members
+        self.band_name = name
+        self.members = musicians
         self.__class__.all.append(self)
 
     def __repr__(self):
@@ -17,14 +18,15 @@ class Band:
 
 
 class Musician:
+    pass
 
     member_list = []
 
-    def __init__(self, name, instrument):
-        """creates a musician instance using subclass based on instrument belo"""
+    def __init__(self, name):
+        """creates a musician instance using subclass
+        based on instrument belo"""
         self.name = name
-        self.instrument = instrument
-        self.__class__.member_list.append(self)
+        # self.__class__.member_list.append(self)
 
     def __repr__(self):
         return self.name
@@ -47,36 +49,50 @@ class Musician:
 
 
 class Vocals(Musician):
+    pass
 
-    def __init__(self, name)
-    super().__init__(name, 'vocalist')
+    def __repr__(self):
+        return self.name
 
-    def play_solo(self):
-        return 'vocal solo'
+    def __str__(self):
+        return 'I am a vocalist named' + {self.name}
+    # def play_solo(self):
+    #     return 'vocal solo'
 
 
 class Guitar(Musician):
+    pass
 
-    def __init__(self, name)
-    super().__init__(name, 'guitarist')
+    # def __init__(self, name)
+    # super().__init__(name, 'guitarist')
 
-    def play_solo(self):
-        return 'guitar solo'
+    # def play_solo(self):
+    #     return 'guitar solo'
 
 
 class Bass(Musician):
+    pass
 
-    def __init__(self, name)
-    super().__init__(name, 'bassist')
+    # def __init__(self, name)
+    # super().__init__(name, 'bassist')
 
-    def play_solo(self):
-        return 'bass solo'
+    # def play_solo(self):
+    #     return 'bass solo'
 
 
 class Drums(Musician):
+    pass
 
-    def __init__(self, name)
-    super().__init__(name, 'drummer')
+    # def __init__(self, name)
+    # super().__init__(name, 'drummer')
 
-    def play_solo(self):
-        return 'drum solo'
+    # def play_solo(self):
+    #     return 'drum solo'
+
+
+jinjer = Band('Jinjer', [tati, roman, eugene, vlad])
+print(jinjer.members)
+tati = Vocals('Tati')
+roman = Guitar('Roman')
+eugene = Bass('Eugene')
+vlad = Drums('Vlad')
