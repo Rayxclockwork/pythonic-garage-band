@@ -12,20 +12,8 @@ class Band:
         """returns the name of the band"""
         return f'The name of the band is {self.name}'
 
-    @classmethod
-    def create_from_data(cls, data):
-        """Create a new band with members Musicians with given data.
-        Data in a string in form
-        Each line has 'name, instrument'
-        First is band name, rest members
-
-
-        Arguments:
-            data{[type]} -- [description]
-        """
-        lines = data.split('\n')
-        name_line = lines[0]
-        line_parts = name_line.split('.')
+    # @classmethod
+    # def create_from_data(cls, data):
 
 
 class Musician:
@@ -40,6 +28,9 @@ class Musician:
 
     def __repr__(self):
         return self.name
+
+    def __str__(self):
+        return f'I am a {self.__class__.__name__} named {self.name}'
 
     @classmethod
     def to_list(cls):
