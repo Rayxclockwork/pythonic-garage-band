@@ -3,11 +3,13 @@ class Band:
     all = []
 
     def __init__(self, name, members=[]):
+        """"creates a band instance using the subclasses below"""
         self.name = name
         self.members = members
         self.__class__.all.append(self)
 
     def __repr__(self):
+        """returns the name of the band"""
         return f'The name of the band is {self.name}'
 
     @classmethod
@@ -31,6 +33,7 @@ class Musician:
     member_list = []
 
     def __init__(self, name, instrument):
+        """creates a musician instance using subclass based on instrument belo"""
         self.name = name
         self.instrument = instrument
         self.__class__.member_list.append(self)
@@ -40,16 +43,19 @@ class Musician:
 
     @classmethod
     def to_list(cls):
+        """returns list of members from each band"""
         return cls.member_list
 
     def get_instrument():
+        """returns instrument based on musician instance"""
         return Musician.instrument
 
     def play_solo():
+        """calls on each musician to play a solo"""
         return Musician.name
 
 
-class Vocals:
+class Vocals(Musician):
 
     def __init__(self, name)
     super().__init__(name, 'vocalist')
@@ -58,7 +64,7 @@ class Vocals:
         return 'vocal solo'
 
 
-class Guitar:
+class Guitar(Musician):
 
     def __init__(self, name)
     super().__init__(name, 'guitarist')
@@ -67,7 +73,7 @@ class Guitar:
         return 'guitar solo'
 
 
-class Bass:
+class Bass(Musician):
 
     def __init__(self, name)
     super().__init__(name, 'bassist')
@@ -76,7 +82,7 @@ class Bass:
         return 'bass solo'
 
 
-class Drums:
+class Drums(Musician):
 
     def __init__(self, name)
     super().__init__(name, 'drummer')
