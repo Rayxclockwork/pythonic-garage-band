@@ -1,20 +1,4 @@
-class Band:
-    pass
-
-    all = []
-
-    def __init__(self, name, musicians=[]):
-        """"creates a band instance using the subclasses below"""
-        self.band_name = name
-        self.members = musicians
-        self.__class__.all.append(self)
-
-    def __repr__(self):
-        """returns the name of the band"""
-        return f'The name of the band is {self.name}'
-
-    # @classmethod
-    # def create_from_data(cls, data):
+import re
 
 
 class Musician:
@@ -22,17 +6,19 @@ class Musician:
 
     member_list = []
 
-    def __init__(self, name):
+    def __init__(self, name, band_name, instrument):
         """creates a musician instance using subclass
         based on instrument belo"""
         self.name = name
-        # self.__class__.member_list.append(self)
+        self.band = band_name
+        self.instrument = instrument
+        Musician.member_list.append([name, band_name, instrument])
 
     def __repr__(self):
         return self.name
 
     def __str__(self):
-        return f'I am a {self.__class__.__name__} named {self.name}'
+        return f'I am a {self.instrument} named {self.name}'
 
     @classmethod
     def to_list(cls):
@@ -45,10 +31,49 @@ class Musician:
 
     def play_solo():
         """calls on each musician to play a solo"""
-        return Musician.name
+        return f"{Musician.name} is playing/singing a solo!"
 
 
-class Vocals(Musician):
+class Band(Musician):
+    pass
+
+    all = []
+
+    def __init__(self, name, musicians=[]):
+        """"creates a band instance using the subclasses below"""
+        self.name = name
+        self.members = musicians
+        self.__class__.all.append(self)
+
+    def __repr__(self):
+        """returns the name of the band"""
+        return f'The name of the band is {self.name}'
+
+    @classmethod
+    def create_from_data(data):
+        split = re.findall(r"\S.*", data)
+        print(split)
+
+        title = split[0]
+        members = []
+        for i in range(1, len(split)):
+            current = split[i].split(',')
+
+            if current[1] == 'Vocalist':
+                members.append(Vocalist(current[0]))
+            if current[1] == 'Guitarist':
+                members.append(Guitarist(current[0]))
+            if current[1] == 'Bassist':
+                members.append(Bassist(current[0]))
+            if current[1] == 'Drummer':
+                members.append(Drummer(current[0]))
+            else:
+                members.append(Musician(current[0]))
+
+        return Band(title, members)
+
+
+class Vocalist(Musician):
     pass
 
     def __repr__(self):
@@ -60,7 +85,7 @@ class Vocals(Musician):
     #     return 'vocal solo'
 
 
-class Guitar(Musician):
+class Guitarist(Musician):
     pass
 
     # def __init__(self, name)
@@ -70,7 +95,7 @@ class Guitar(Musician):
     #     return 'guitar solo'
 
 
-class Bass(Musician):
+class Bassist(Musician):
     pass
 
     # def __init__(self, name)
@@ -80,7 +105,7 @@ class Bass(Musician):
     #     return 'bass solo'
 
 
-class Drums(Musician):
+class Drummer(Musician):
     pass
 
     # def __init__(self, name)
@@ -90,9 +115,13 @@ class Drums(Musician):
     #     return 'drum solo'
 
 
-jinjer = Band('Jinjer', [tati, roman, eugene, vlad])
-print(jinjer.members)
-tati = Vocals('Tati')
-roman = Guitar('Roman')
-eugene = Bass('Eugene')
-vlad = Drums('Vlad')
+if __name__ == "__main__":
+
+    band_test = """
+    Jinjer
+    Tati,Vocalist
+    Vlad,Drummer
+    Eugene,Bassist
+    Roman,Guitarist
+    """
+    print(band_test)
